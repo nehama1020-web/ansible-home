@@ -1,5 +1,4 @@
 # roles/database/tasks/install.yml
-
 ---
 - name: Install MySQL server
   apt:
