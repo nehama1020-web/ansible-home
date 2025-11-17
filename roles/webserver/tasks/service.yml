@@ -18,9 +18,13 @@
       when: nginx_dpkg.rc == 0
 
     - name: Check nginx homepage after restart
-      command: curl -sSf http://localhost
+      uri:
+        url: http://localhost
+        status_code: 200
+        return_content: false
       register: nginx_health
       changed_when: false
+      failed_when: nginx_health.status | default(0) != 200
       when: nginx_dpkg.rc == 0
 
   rescue:
@@ -32,6 +36,7 @@
     - name: Always log end of nginx restart block
       debug:
         msg: "Finished nginx restart block on {{ inventory_hostname }}"
+
   tags:
     - service
     - restart
