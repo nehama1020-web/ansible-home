@@ -1,0 +1,33 @@
+---
+# roles/webserver/tasks/configure.yml
+
+- name: Deploy custom index.html template
+  template:
+    src: index.html.j2
+    dest: /usr/share/nginx/html/index.html
+  notify: Restart nginx
+  tags:
+    - install
+
+- name: Deploy nginx main config
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  notify: Restart nginx
+  tags:
+    - install
+
+- name: Ensure webapp config directory exists
+  file:
+    path: /etc/webapp
+    state: directory
+    mode: "0755"
+
+- name: Configure webapp DB connection
+  template:
+    src: db.conf.j2
+    dest: /etc/webapp/db.conf
+  tags:
+    - configure
+    - db
+

@@ -1,0 +1,29 @@
+---
+# roles/webserver/tasks/facts.yml
+
+- name: Ensure custom facts directory exists
+  become: true
+  file:
+    path: /etc/ansible/facts.d
+    state: directory
+    mode: "0755"
+
+- name: Create custom fact
+  become: true
+  copy:
+    dest: /etc/ansible/facts.d/custom.fact
+    mode: "0644"
+    content: |
+      [custom]
+      environment=['dev','production']
+      tier=web
+
+- name: Reload facts to pick up custom fact
+  become: true
+  setup:
+    filter: ansible_local
+
+- name: Show custom environment fact
+  debug:
+    msg: "This server is in environment: {{ ansible_local.custom.environment | default('unknown') }}"
+

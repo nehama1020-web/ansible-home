@@ -1,0 +1,22 @@
+# site.yml.
+
+- name: Configure database servers
+  hosts: db
+  become: true
+  roles:
+    - database
+
+- name: Configure web servers
+  hosts: web
+  become: true
+  roles:
+    - webserver
+
+#- name: Install Ansible Galaxy roles
+# run: ansible-galaxy role install geerlingguy.nginx
+
+- name: Install nginx via Galaxy role (geerlingguy)
+  hosts: galaxy_web
+  become: true
+  roles:
+    - geerlingguy.nginx

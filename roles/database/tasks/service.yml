@@ -1,0 +1,9 @@
+# roles/database/tasks/service.yml
+
+---
+- name: Ensure MySQL service is running
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+  become: true

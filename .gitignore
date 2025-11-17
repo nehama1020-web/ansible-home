@@ -1,0 +1,9 @@
+cat << 'EOF' > .gitignore
+# Ignore GitHub self-hosted runner
+actions-runner/
+externals/
+_node/
+node_modules/
+*.tar.gz
+EOF
+

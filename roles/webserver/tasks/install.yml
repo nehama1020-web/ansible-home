@@ -1,0 +1,15 @@
+# roles/webserver/tasks/install.yml
+
+- name: Ensure base packages are present
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - curl
+    - vim
+    - git
+    - nginx
+  tags: 
+    - install
+    - packages
+

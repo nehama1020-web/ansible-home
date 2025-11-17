@@ -1,0 +1,4 @@
+
+---
+web_title: "Neha Website"
+server_name: "{{ inventory_hostname }}"

@@ -1,0 +1,38 @@
+# roles/webserver/tasks/service.yml
+
+- name: Check if nginx is installed
+  command: dpkg -s nginx
+  register: nginx_dpkg
+  changed_when: false
+  failed_when: false
+  tags:
+    - service
+    - check
+
+- name: Restart nginx with error handling
+  block:
+    - name: Restart nginx only if installed
+      service:
+        name: nginx
+        state: restarted
+      when: nginx_dpkg.rc == 0
+
+    - name: Check nginx homepage after restart
+      command: curl -sSf http://localhost
+      register: nginx_health
+      changed_when: false
+      when: nginx_dpkg.rc == 0
+
+  rescue:
+    - name: Log nginx restart failure
+      debug:
+        msg: "Nginx restart or health check FAILED on {{ inventory_hostname }}"
+
+  always:
+    - name: Always log end of nginx restart block
+      debug:
+        msg: "Finished nginx restart block on {{ inventory_hostname }}"
+  tags:
+    - service
+    - restart
+

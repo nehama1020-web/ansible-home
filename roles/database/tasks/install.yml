@@ -1,0 +1,9 @@
+# roles/database/tasks/install.yml
+
+---
+- name: Install MySQL server
+  apt:
+    name: mysql-server
+    state: present
+    update_cache: yes
+  become: true

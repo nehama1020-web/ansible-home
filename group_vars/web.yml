@@ -1,0 +1,8 @@
+
+---
+web_title: "My Web Group Site"
+server_name: "{{ inventory_hostname }}"
+
+# DB connection info for web tier
+db_host: "{{ groups['db'][0] }}"   # first host in [db] group
+db_name: "sampledb"

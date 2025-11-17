@@ -1,0 +1,5 @@
+
+---
+- name: Simple cleanup task
+  debug:
+    msg: "Cleanup step ran on {{ inventory_hostname }}"
