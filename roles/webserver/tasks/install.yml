@@ -1,5 +1,4 @@
 # roles/webserver/tasks/install.yml
-
 ---
 - name: Ensure base packages are present
   package:
