@@ -11,4 +11,3 @@
 - import_tasks: configure.yml
 - import_tasks: facts.yml
 - import_tasks: cleanup.yml
-
