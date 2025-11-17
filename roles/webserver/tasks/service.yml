@@ -1,5 +1,6 @@
 # roles/webserver/tasks/service.yml
 
+---
 - name: Check if nginx is installed
   command: dpkg -s nginx
   register: nginx_dpkg
@@ -35,4 +36,3 @@
   tags:
     - service
     - restart
-
