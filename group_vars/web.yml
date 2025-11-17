@@ -1,4 +1,3 @@
-
 ---
 web_title: "My Web Group Site"
 server_name: "{{ inventory_hostname }}"
