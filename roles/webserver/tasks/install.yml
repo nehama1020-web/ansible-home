@@ -9,6 +9,6 @@
     - vim
     - git
     - nginx
-  tags: 
+  tags:
     - install
     - packages
