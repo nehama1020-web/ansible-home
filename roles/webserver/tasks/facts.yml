@@ -1,3 +1,4 @@
+
 ---
 # roles/webserver/tasks/facts.yml
 
@@ -26,4 +27,3 @@
 - name: Show custom environment fact
   debug:
     msg: "This server is in environment: {{ ansible_local.custom.environment | default('unknown') }}"
-
