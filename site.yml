@@ -12,9 +12,6 @@
   roles:
     - webserver
 
-# - name: Install Ansible Galaxy roles
-#   run: ansible-galaxy role install geerlingguy.nginx
-
 - name: Install nginx via Galaxy role (geerlingguy)
   hosts: galaxy_web
   become: true
