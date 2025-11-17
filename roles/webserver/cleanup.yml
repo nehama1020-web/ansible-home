@@ -1,0 +1,5 @@
+---
+# Cleanup tasks for webserver role
+- name: Simple webserver cleanup task
+  debug:
+    msg: "Webserver cleanup step ran on {{ inventory_hostname }}"
