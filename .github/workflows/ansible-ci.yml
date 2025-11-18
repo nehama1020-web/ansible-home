@@ -10,7 +10,7 @@ on:
 jobs:
   lint-and-syntax-check:
     name: Lint and Syntax Check
-    runs-on: [ self-hosted, ansible ]
+    runs-on: [ self-hosted, neha ]
 
     steps:
       - name: Checkout repository
