@@ -2,10 +2,10 @@
 vm1 ansible_host=10.56.44.183
 
 [db]
-vm2
+vm2 ansible_host=10.56.44.29
 
 [galaxy_web]
-vm3
+vm3 ansible_host=10.56.44.246
 
 [all:vars]
 ansible_user=ubuntu
