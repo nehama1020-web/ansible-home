@@ -36,4 +36,4 @@ jobs:
 
       - name: Syntax-check playbook
         run: |
-          ansible-playbook site.yml -i inventory --syntax-check
+          ansible-playbook playbooks/site.yml -i inventory --syntax-check
