@@ -1,5 +1,5 @@
 ---
-name: Ansible CI.
+name: Ansible CI
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 jobs:
   lint-and-syntax-check:
     name: Lint and Syntax Check
-    runs-on: [ self-hosted ]
+    runs-on: [ self-hosted, ansible ]
 
     steps:
       - name: Checkout repository
