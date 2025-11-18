@@ -32,8 +32,15 @@ jobs:
 
       - name: Run ansible-lint
         run: |
-          ansible-lint .
+          ansible-lint
+
+      - name: Create vault password file
+        run: |
+          echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
+          chmod 600 ~/.vault_pass.txt
 
       - name: Syntax-check playbook
         run: |
-          ansible-playbook playbooks/site.yml -i inventory --syntax-check
+          ansible-playbook playbooks/site.yml -i inventory --syntax-check --vault-password-file ~/.vault_pass.txt
+
+
