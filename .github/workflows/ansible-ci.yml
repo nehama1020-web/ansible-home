@@ -43,6 +43,11 @@ jobs:
         run: |
           ansible-playbook playbooks/site.yml -i inventory --syntax-check --vault-password-file ~/.vault_pass.txt
 
+      - name: Run Ansible Playbook
+        run: |
+          ansible-playbook playbooks/site.yml -i inventory --vault-password-file vault.txt
+
+
       - name: Create vault password file
         run: |
           echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
