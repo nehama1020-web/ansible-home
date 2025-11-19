@@ -10,7 +10,7 @@ on:
 jobs:
   lint-and-syntax-check:
     name: Lint and Syntax Check
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
