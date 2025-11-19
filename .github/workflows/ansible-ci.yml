@@ -10,16 +10,16 @@ on:
 jobs:
   lint-and-syntax-check:
     name: Lint and Syntax Check
-    runs-on: [ self-hosted, neha ]
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # - name: Set up Python
-      #   uses: actions/setup-python@v5
-      #   with:
-      #     python-version: "3.12"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
       - name: Install Ansible and ansible-lint
         run: |
