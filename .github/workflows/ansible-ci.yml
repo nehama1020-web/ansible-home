@@ -45,8 +45,27 @@ jobs:
             --syntax-check \
             --vault-password-file ~/.vault_pass.txt
 
-      - name: Run Ansible Playbook
+  deploy-with-ansible:
+    name: Run Ansible Playbook on self-hosted
+    needs: lint-and-syntax-check      
+    runs-on: [ self-hosted, neha ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use existing Ansible venv (if you have one)
+        shell: bash
         run: |
+          # adjust this path if your venv is elsewhere
+          if [ -d "/root/.ansible-venv" ]; then
+            source /root/.ansible-venv/bin/activate
+          fi
+
+          echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
+          chmod 600 ~/.vault_pass.txt
+
+          # Run the same command you use locally
           ansible-playbook playbooks/site.yml \
             -i inventory \
             --vault-password-file ~/.vault_pass.txt
