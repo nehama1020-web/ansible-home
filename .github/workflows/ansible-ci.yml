@@ -29,10 +29,10 @@ jobs:
         run: |
           ansible-galaxy role install geerlingguy.nginx -p roles
 
-      # - name: Create vault password file
-      #   run: |
-      #     echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
-      #     chmod 600 ~/.vault_pass.txt
+      - name: Create vault password file
+        run: |
+          echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
+          chmod 600 ~/.vault_pass.txt
 
       # - name: Run ansible-lint
       #   run: |
