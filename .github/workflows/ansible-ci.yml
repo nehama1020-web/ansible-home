@@ -66,8 +66,8 @@ jobs:
           chmod 600 ~/.vault_pass.txt
 
           # Run the same command you use locally
-          ansible-playbook playbooks/site.yml \
-            -i inventory \
+          ansible-playbook playbooks/site.yml -i inventory/hosts
+            -i inventory 
             --vault-password-file ~/.vault_pass.txt
 
       - name: Run Ansible Playbook on self-hosted
