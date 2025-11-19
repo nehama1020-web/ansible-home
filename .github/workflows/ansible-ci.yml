@@ -9,7 +9,7 @@ on:
 jobs:
   lint-and-syntax-check:
     name: Lint and Syntax Check
-    runs-on: [ self-hosted, neha ]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -48,7 +48,7 @@ jobs:
   deploy-with-ansible:
     name: Run Ansible Playbook on self-hosted
     needs: lint-and-syntax-check      
-    runs-on: [ self-hosted, neha ]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
