@@ -40,7 +40,7 @@ jobs:
 
       - name: Syntax-check playbook
         run: |
-          ansible-playbook site.yml -i inventory/hosts --vault-password-file ~/.vault_pass.txt
+          ansible-playbook ansible-home/playbooks/site.yml -i inventory/hosts --vault-password-file ~/.vault_pass.txt
                     # ansible-playbook site.yml -i inventory/hosts --syntax-check --vault-password-file ~/.vault_pass.txt
 
   # deploy-with-ansible:
