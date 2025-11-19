@@ -9,7 +9,7 @@ on:
 jobs:
   lint-and-syntax-check:
     name: Lint and Syntax Check
-    runs-on: [ self-hosted , neha ]
+    runs-on: [ self-hosted, neha ]
 
     steps:
       - name: Checkout repository
@@ -23,7 +23,7 @@ jobs:
       - name: Install Ansible and ansible-lint
         run: |
           python -m pip install --upgrade pip
-          pip install ansible ansible-lint
+          pip install "ansible<11" ansible-lint
 
       - name: Install Ansible Galaxy roles
         run: |
@@ -40,15 +40,15 @@ jobs:
 
       - name: Syntax-check playbook
         run: |
-          ansible-playbook playbooks/site.yml \
-            -i inventory \
+          ansible-playbook site.yml \
+            -i inventory/hosts \
             --syntax-check \
             --vault-password-file ~/.vault_pass.txt
 
   deploy-with-ansible:
     name: Run Ansible Playbook on self-hosted
-    needs: lint-and-syntax-check      
-    runs-on: [ self-hosted , neha ]
+    needs: lint-and-syntax-check
+    runs-on: [ self-hosted, neha ]
 
     steps:
       - name: Checkout repository
@@ -57,20 +57,20 @@ jobs:
       - name: Use existing Ansible venv (if you have one)
         shell: bash
         run: |
-          # adjust this path if your venv is elsewhere
           if [ -d "/root/ansible-home" ]; then
             source /root/ansible-home/bin/activate
           fi
-
           echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
           chmod 600 ~/.vault_pass.txt
 
-          # Run the same command you use locally
-          ansible-playbook playbooks/site.yml -i inventory/hosts
-            -i inventory 
+      - name: Run Ansible Playbook with static inventory
+        run: |
+          ansible-playbook site.yml \
+            -i inventory/hosts \
             --vault-password-file ~/.vault_pass.txt
 
-      - name: Run Ansible Playbook on self-hosted
+      - name: Run Ansible Playbook with dynamic inventory
         run: |
-          ansible-playbook playbooks/site.yml -i tools/dynamic_inventory.py
-
+          ansible-playbook site.yml \
+            -i tools/dynamic_inventory.py \
+            --vault-password-file ~/.vault_pass.txt
