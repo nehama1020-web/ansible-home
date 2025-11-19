@@ -45,6 +45,14 @@ jobs:
             --syntax-check \
             --vault-password-file ~/.vault_pass.txt
 
+      - name: Run Ansible Playbook on self-hosted
+        run: |
+          ansible-playbook playbooks/site.yml \
+            -i inventory/hosts \
+            --vault-password-file ~/.vault_pass.txt
+
+
+
 
   # deploy-with-ansible:
   #   name: Run Ansible Playbook on self-hosted
