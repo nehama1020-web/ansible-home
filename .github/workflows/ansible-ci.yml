@@ -58,8 +58,8 @@ jobs:
         shell: bash
         run: |
           # adjust this path if your venv is elsewhere
-          if [ -d "/root/.ansible-venv" ]; then
-            source /root/.ansible-venv/bin/activate
+          if [ -d "/root/ansible-home" ]; then
+            source /root/ansible-home/bin/activate
           fi
 
           echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
