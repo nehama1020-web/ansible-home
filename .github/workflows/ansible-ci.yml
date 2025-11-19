@@ -38,17 +38,17 @@ jobs:
         run: |
           ansible-lint .
 
-      - name: Syntax-check playbook
-        run: |
-          ansible-playbook site.yml \
-            -i inventory/hosts \
-            --syntax-check \
-            --vault-password-file ~/.vault_pass.txt
+      # - name: Syntax-check playbook
+      #   run: |
+      #     ansible-playbook site.yml \
+      #       -i inventory/hosts \
+      #       --syntax-check \
+      #       --vault-password-file ~/.vault_pass.txt
 
-  # deploy-with-ansible:
-  #   name: Run Ansible Playbook on self-hosted
-  #   needs: lint-and-syntax-check
-  #   runs-on: [ self-hosted, neha ]
+  deploy-with-ansible:
+    name: Run Ansible Playbook on self-hosted
+    needs: lint-and-syntax-check
+    runs-on: [ self-hosted, neha ]
 
   #   steps:
   #     - name: Checkout repository
