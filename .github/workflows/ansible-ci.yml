@@ -77,7 +77,7 @@ jobs:
 
       - name: Run Ansible Playbook with static inventory
         run: |
-          ansible-playbook site.yml \
+          ansible-playbook playbooks/site.yml \
             -i inventory/hosts \
             --vault-password-file ~/.vault_pass.txt
 
