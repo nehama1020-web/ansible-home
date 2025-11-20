@@ -75,14 +75,14 @@ jobs:
           echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
           chmod 600 ~/.vault_pass.txt
 
-      - name: Run Ansible Playbook with static inventory
-        run: |
-          ansible-playbook playbooks/site.yml \
-            -i inventory/hosts \
-            --vault-password-file ~/.vault_pass.txt
+      # - name: Run Ansible Playbook with static inventory
+      #   run: |
+      #     ansible-playbook playbooks/site.yml \
+      #       -i inventory/hosts \
+      #       --vault-password-file ~/.vault_pass.txt
 
-      - name: Run Ansible Playbook (dynamic inventory)
-        run: |
-          ansible-playbook playbooks/site.yml \
-            -i tools/dynamic_inventory.py \
-            --vault-password-file ~/.vault_pass.txt
+      # - name: Run Ansible Playbook (dynamic inventory)
+      #   run: |
+      #     ansible-playbook playbooks/site.yml \
+      #       -i tools/dynamic_inventory.py \
+      #       --vault-password-file ~/.vault_pass.txt
