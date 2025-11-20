@@ -61,11 +61,11 @@ jobs:
       #       -i inventory/hosts \
       #       --vault-password-file ~/.vault_pass.txt
 
-      # - name: Run Ansible Playbook (dynamic inventory)
-      #   run: |
-      #     ansible-playbook playbooks/site.yml \
-      #       -i tools/dynamic_inventory.py \
-      #       --vault-password-file ~/.vault_pass.txt
+      - name: Run Ansible Playbook (dynamic inventory)
+        run: |
+          ansible-playbook playbooks/site.yml \
+            -i tools/dynamic_inventory.py \
+            --vault-password-file ~/.vault_pass.txt
 
   deploy-with-ansible:
     name: Run Ansible Playbook on self-hosted
