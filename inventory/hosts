@@ -8,7 +8,8 @@ ansible_ssh_private_key_file=/root/.ssh/ansible_vm
 
 [galaxy_web]
 vm3 ansible_host=10.56.44.246
-ansible_ssh_private_key_file=/home/neha/.ssh/ansible_vm
+ansible_ssh_private_key_file=/home/ubuntu/.ssh
+# ansible_ssh_private_key_file=/home/neha/.ssh/ansible_vm
 
 [all:vars]
 ansible_user=ubuntu
