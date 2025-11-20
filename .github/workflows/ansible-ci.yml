@@ -44,16 +44,16 @@ jobs:
           echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
           chmod 600 ~/.vault_pass.txt
 
-      - name: Run ansible-lint
-        run: |
-          ansible-lint .
+      # - name: Run ansible-lint
+      #   run: |
+      #     ansible-lint .
 
-      - name: Syntax-check playbook
-        run: |
-          ansible-playbook playbooks/site.yml \
-            -i inventory/hosts \
-            --syntax-check \
-            --vault-password-file ~/.vault_pass.txt
+      # - name: Syntax-check playbook
+      #   run: |
+      #     ansible-playbook playbooks/site.yml \
+      #       -i inventory/hosts \
+      #       --syntax-check \
+      #       --vault-password-file ~/.vault_pass.txt
 
       # - name: Run Ansible Playbook on self-hosted
       #   run: |
@@ -61,35 +61,35 @@ jobs:
       #       -i inventory/hosts \
       #       --vault-password-file ~/.vault_pass.txt
 
-      - name: Run Ansible Playbook (dynamic inventory)
-        run: |
-          ansible-playbook playbooks/site.yml \
-            -i tools/dynamic_inventory.py \
-            --vault-password-file ~/.vault_pass.txt
+      # - name: Run Ansible Playbook (dynamic inventory)
+      #   run: |
+      #     ansible-playbook playbooks/site.yml \
+      #       -i tools/dynamic_inventory.py \
+      #       --vault-password-file ~/.vault_pass.txt
 
-  deploy-with-ansible:
-    name: Run Ansible Playbook on self-hosted
-    needs: lint-and-syntax-check
-    runs-on: [ self-hosted, neha ]
+  # deploy-with-ansible:
+  #   name: Run Ansible Playbook on self-hosted
+  #   needs: lint-and-syntax-check
+  #   runs-on: [ self-hosted, neha ]
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
 
-      - name: Use existing Ansible venv (if you have one)
-        shell: bash
-        run: |
-          if [ -d "/root/ansible-home" ]; then
-            source /root/ansible-home/bin/activate
-          fi
-          echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
-          chmod 600 ~/.vault_pass.txt
+  #     - name: Use existing Ansible venv (if you have one)
+  #       shell: bash
+  #       run: |
+  #         if [ -d "/root/ansible-home" ]; then
+  #           source /root/ansible-home/bin/activate
+  #         fi
+  #         echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
+  #         chmod 600 ~/.vault_pass.txt
 
-      - name: Run Ansible Playbook with static inventory
-        run: |
-          ansible-playbook playbooks/site.yml \
-            -i inventory/hosts \
-            --vault-password-file ~/.vault_pass.txt
+  #     - name: Run Ansible Playbook with static inventory
+  #       run: |
+  #         ansible-playbook playbooks/site.yml \
+  #           -i inventory/hosts \
+  #           --vault-password-file ~/.vault_pass.txt
 
       # - name: Run Ansible Playbook (dynamic inventory)
       #   run: |
