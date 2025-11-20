@@ -57,15 +57,10 @@ jobs:
             -i tools/dynamic_inventory.py \
             --vault-password-file ~/.vault_pass.txt
 
-
-
-
-
-
-  # deploy-with-ansible:
-  #   name: Run Ansible Playbook on self-hosted
-  #   needs: lint-and-syntax-check
-  #   runs-on: [ self-hosted, neha ]
+  deploy-with-ansible:
+    name: Run Ansible Playbook on self-hosted
+    needs: lint-and-syntax-check
+    runs-on: [ self-hosted, neha ]
 
   #   steps:
   #     - name: Checkout repository
