@@ -2,27 +2,50 @@
 import json
 import sys
 
-# Simple dynamic inventory for Ansible
-# Replace these with your real hostnames or IPs
-web_hosts = ["vm1", "vm2", "vm3"]
+HOSTS = {
+    "vm1": {
+        "ansible_host": "10.56.44.183",
+        "ansible_user": "ubuntu",
+        "ansible_ssh_private_key_file": "~/.ssh/id_rsa",
+    },
+    "vm2": {
+        "ansible_host": "10.56.44.29",
+        "ansible_user": "ubuntu",
+        "ansible_ssh_private_key_file": "~/.ssh/id_rsa",
+    },
+    "vm3": {
+        "ansible_host": "10.56.44.246",
+        "ansible_user": "ubuntu",
+        "ansible_ssh_private_key_file": "~/.ssh/id_rsa",
+    },
+}
 
 inventory = {
     "web": {
-        "hosts": web_hosts,
-        "vars": {
-            "ansible_user": "ubuntu"   # change if your user is different
-        }
+        "hosts": ["vm1"],
+    },
+    "db": {
+        "hosts": ["vm2"],
+    },
+    "galaxy_web": {
+        "hosts": ["vm3"],
     },
     "_meta": {
-        "hostvars": {}
-    }
+        "hostvars": HOSTS,
+    },
 }
 
-if len(sys.argv) == 2 and sys.argv[1] == "--list":
-    print(json.dumps(inventory))
-elif len(sys.argv) == 3 and sys.argv[1] == "--host":
-    # per-host variables (we keep it empty for now)
-    print(json.dumps(inventory["_meta"]["hostvars"].get(sys.argv[2], {})))
-else:
-    # fallback empty
-    print(json.dumps({}))
+def main():
+    # ansible-inventory --list
+    if len(sys.argv) == 2 and sys.argv[1] == "--list":
+        print(json.dumps(inventory))
+    # ansible-inventory --host <hostname>
+    elif len(sys.argv) == 3 and sys.argv[1] == "--host":
+        host = sys.argv[2]
+        print(json.dumps(inventory["_meta"]["hostvars"].get(host, {})))
+    else:
+        # default empty
+        print(json.dumps({}))
+
+if __name__ == "__main__":
+    main()
