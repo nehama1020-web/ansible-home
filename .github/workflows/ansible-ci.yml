@@ -18,17 +18,22 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.11"
+
+      - name: Install Ansible and ansible-lint
+        run: |
+          python -m pip install --upgrade pip
+          pip install "ansible==9.2.0" "ansible-core==2.16.6" ansible-lint
 
       - name: Install Ansible
         run: |
           python3 -m pip install --user "ansible==9.5.1"
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Install Ansible and ansible-lint
-        run: |
-          python -m pip install --upgrade pip
-          pip install "ansible<11" ansible-lint
+      # - name: Install Ansible and ansible-lint
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install "ansible<11" ansible-lint
 
       - name: Install Ansible Galaxy roles
         run: |
