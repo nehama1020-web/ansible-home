@@ -1,13 +1,14 @@
 [web]
 vm1 ansible_host=10.56.44.183
+ansible_ssh_private_key_file=/root/.ssh/id_rsa
 
 [db]
 vm2 ansible_host=10.56.44.29
+ansible_ssh_private_key_file=/root/.ssh/ansible_vm
 
 [galaxy_web]
 vm3 ansible_host=10.56.44.246
+ansible_ssh_private_key_file=/home/neha/.ssh/ansible_vm
 
 [all:vars]
 ansible_user=ubuntu
-ansible_ssh_private_key_file=/root/.ssh/ansible_vm
-# ansible_ssh_private_key_file=/root/.ssh/id_rsa
