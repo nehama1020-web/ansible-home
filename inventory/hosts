@@ -1,4 +1,4 @@
-[web]
+[hosts]
 hs1 ansible_host=10.56.44.41
 
 [db]
