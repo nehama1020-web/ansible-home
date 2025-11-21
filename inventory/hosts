@@ -2,7 +2,7 @@
 hs1 ansible_host=10.56.44.41
 
 [db]
-hs2=ssh ubuntu@10.56.44.66
+hs2 ansible_host=10.56.44.66
 
 [galaxy_web]
 hs3 ansible_host=10.56.44.117
