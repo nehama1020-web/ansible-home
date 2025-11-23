@@ -6,7 +6,7 @@ docker_packages:
   - apt-transport-https
 
 docker_apt_repo: "https://download.docker.com/linux/ubuntu"
-docker_gpg_path: "/etc/apt/keyrings/docker.asc"
+docker_gpg_path: "/etc/apt/keyrings/docker.gpg"
 
 docker_install_packages:
   - docker-ce
