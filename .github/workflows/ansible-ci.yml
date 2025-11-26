@@ -57,9 +57,9 @@ jobs:
 
       - name: Syntax-check playbook (dynamic inventory)
         run: |
-          chmod +x inventory/multipass_inventory.py
+          chmod +x tools/dynamic_inventory.py
           ansible-playbook playbooks/site.yml \
-            -i inventory/multipass_inventory.py \
+            -i tools/dynamic_inventory.py \
             --syntax-check \
             --vault-password-file ~/.vault_pass.txt
 
@@ -87,10 +87,16 @@ jobs:
           echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
           chmod 600 ~/.vault_pass.txt
 
-      - name: Run Ansible Playbook with static inventory
+      # - name: Run Ansible Playbook with static inventory
+      #   run: |
+      #     ansible-playbook playbooks/site.yml \
+      #       -i inventory/hosts \
+      #       --vault-password-file ~/.vault_pass.txt
+
+      - name: Syntax-check playbook (dynamic inventory)
         run: |
+          chmod +x tools/dynamic_inventory.py
           ansible-playbook playbooks/site.yml \
-            -i inventory/hosts \
+            -i tools/dynamic_inventory.py \
+            --syntax-check \
             --vault-password-file ~/.vault_pass.txt
-
-
