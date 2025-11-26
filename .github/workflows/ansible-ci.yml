@@ -100,3 +100,4 @@ jobs:
             -i tools/dynamic_inventory.py \
             --syntax-check \
             --vault-password-file ~/.vault_pass.txt
+            -vvv
