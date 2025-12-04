@@ -44,11 +44,11 @@ jobs:
             --syntax-check \
             --vault-password-file ~/.vault_pass.txt
 
-      - name: Run Ansible Playbook (static inventory)
-        run: |
-          ansible-playbook playbooks/site.yml \
-            -i inventory/hosts \
-            --vault-password-file ~/.vault_pass.txt
+      # - name: Run Ansible Playbook (static inventory)
+      #   run: |
+      #     ansible-playbook playbooks/site.yml \
+      #       -i inventory/hosts \
+      #       --vault-password-file ~/.vault_pass.txt
 
   deploy-with-ansible:
     name: Deploy with Ansible on self-hosted
