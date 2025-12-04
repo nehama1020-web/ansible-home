@@ -20,12 +20,23 @@ jobs:
     runs-on: [self-hosted, shr]
     env:
       AGENT_TOOLSDIRECTORY: /Users/neha/hostedtoolcache
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      # - name: Install ansible-lint
+      #   run: |
+      #     pip install ansible ansible-lint
+
+      # - name: Run ansible-lint
+      #   run: |
+      #     ansible-lint
 
       # - name: Set up Python
       #   uses: actions/setup-python@v5
