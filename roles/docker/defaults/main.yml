@@ -1,3 +1,8 @@
 ---
-docker_package: docker.io
+# List of Docker-related packages to install on Ubuntu
+docker_packages:
+  - docker.io
+  - docker-compose-plugin
+
+# Desired package state
 docker_state: present
