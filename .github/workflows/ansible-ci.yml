@@ -1,4 +1,4 @@
-name: Ansible CI.
+name: Ansible CI
 
 on:
   push:
@@ -10,15 +10,10 @@ jobs:
   lint-and-syntax-check:
     name: Lint and Syntax Check
     runs-on: [ self-hosted, shr ]
+    env:
+      AGENT_TOOLSDIRECTORY: /Users/neha/hostedtoolcache
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        env:
-          AGENT_TOOLSDIRECTORY: /Users/neha/hostedtoolcache
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -27,33 +22,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      # - name: Install ansible-lint
-      #   run: |
-      #     pip install ansible ansible-lint
-
-      # - name: Run ansible-lint
-      #   run: |
-      #     ansible-lint
-
-      # - name: Set up Python
-      #   uses: actions/setup-python@v5
-      #   with:
-      #     python-version: "3.11"
-
       - name: Install Ansible and ansible-lint
         run: |
           python -m pip install --upgrade pip
-          pip install "ansible==9.2.0" "ansible-core==2.16.6" ansible-lint
-
-      - name: Install Ansible
-        run: |
-          python3 -m pip install --user "ansible==9.5.1"
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-      - name: Install Ansible and ansible-lint
-        run: |
-          python -m pip install --upgrade pip
-          pip install "ansible<11" ansible-lint
+          pip install "ansible==9.5.1" ansible-lint
 
       - name: Install Ansible Galaxy roles
         run: |
@@ -64,17 +36,6 @@ jobs:
           echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
           chmod 600 ~/.vault_pass.txt
 
-      # - name: Run ansible-lint
-      #   run: |
-      #     ansible-lint .
-
-      # - name: Syntax-check playbook
-      #   run: |
-      #     ansible-playbook playbooks/site.yml \
-      #       -i inventory/hosts \
-      #       --syntax-check \
-      #       --vault-password-file ~/.vault_pass.txt
-
       - name: Syntax-check playbook (dynamic inventory)
         run: |
           chmod +x tools/dynamic_inventory.py
@@ -83,35 +44,37 @@ jobs:
             --syntax-check \
             --vault-password-file ~/.vault_pass.txt
 
-      - name: Run Ansible Playbook on self-hosted
+      - name: Run Ansible Playbook (static inventory)
         run: |
           ansible-playbook playbooks/site.yml \
             -i inventory/hosts \
             --vault-password-file ~/.vault_pass.txt
 
   deploy-with-ansible:
-    name: Run Ansible Playbook on self-hosted
+    name: Deploy with Ansible on self-hosted
     needs: lint-and-syntax-check
     runs-on: [ self-hosted, hs ]
+    env:
+      AGENT_TOOLSDIRECTORY: /Users/neha/hostedtoolcache
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use existing Ansible venv (if you have one)
-        shell: bash
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Ansible
         run: |
-          if [ -d "/root/ansible-home" ]; then
-            source /root/ansible-home/bin/activate
-          fi
+          python -m pip install --upgrade pip
+          pip install "ansible==9.5.1"
+
+      - name: Create vault password file
+        run: |
           echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > ~/.vault_pass.txt
           chmod 600 ~/.vault_pass.txt
-
-      # - name: Run Ansible Playbook with static inventory
-      #   run: |
-      #     ansible-playbook playbooks/site.yml \
-      #       -i inventory/hosts \
-      #       --vault-password-file ~/.vault_pass.txt
 
       - name: Syntax-check playbook (dynamic inventory)
         run: |
