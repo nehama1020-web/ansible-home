@@ -53,7 +53,7 @@ jobs:
   deploy-with-ansible:
     name: Deploy with Ansible on self-hosted
     needs: lint-and-syntax-check
-    runs-on: [ self-hosted, hs ]
+    runs-on: [ self-hosted, shr ]
     env:
       AGENT_TOOLSDIRECTORY: /Users/neha/hostedtoolcache
 
