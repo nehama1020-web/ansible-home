@@ -17,7 +17,7 @@ jobs:
 
 jobs:
   lint:
-    runs-on: [self-hosted, hs]
+    runs-on: [self-hosted, shr]
     env:
       AGENT_TOOLSDIRECTORY: /Users/neha/hostedtoolcache
     steps:
