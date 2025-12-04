@@ -9,7 +9,7 @@ on:
 jobs:
   lint-and-syntax-check:
     name: Lint and Syntax Check
-    runs-on: [ self-hosted, hs ]
+    runs-on: [ self-hosted, shr ]
 
     steps:
       - name: Checkout repository
