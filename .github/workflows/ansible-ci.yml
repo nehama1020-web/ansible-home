@@ -9,7 +9,7 @@ on:
 jobs:
   lint-and-syntax-check:
     name: Lint and Syntax Check
-    runs-on: [ self-hosted, shr ]
+    runs-on: [ self-hosted, neha ]
     env:
       AGENT_TOOLSDIRECTORY: /Users/neha/hostedtoolcache
 
